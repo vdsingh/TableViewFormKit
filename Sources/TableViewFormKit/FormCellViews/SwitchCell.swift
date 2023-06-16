@@ -52,8 +52,8 @@ public class SwitchCell: BasicCell {
     override public func awakeFromNib() {
         super.awakeFromNib()
 //        self.backgroundColor = StudiumColor.secondaryBackground.uiColor
-//        self.label.textColor = StudiumColor.primaryLabel.uiColor
-//        self.infoButton.backgroundColor = StudiumColor.secondaryBackground.uiColor
+        self.label.textColor = ColorManager.primaryTextColor
+        self.infoButton.backgroundColor = ColorManager.cellBackgroundColor
     }
     
     

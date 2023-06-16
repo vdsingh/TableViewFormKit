@@ -25,6 +25,13 @@ public class TextFieldCell: BasicCell {
         super.awakeFromNib()
         self.textField.returnKeyType = UIReturnKeyType.done
         
+        let attributes: [NSAttributedString.Key: Any] = [
+            .foregroundColor: ColorManager.placeholderTextColor // Set your desired color here
+        ]
+        
+        self.textField.attributedPlaceholder = NSAttributedString(string: textField.placeholder ?? "", attributes: attributes)
+        self.textField.textColor = ColorManager.primaryTextColor
+        
 //        self.backgroundColor = StudiumColor.secondaryBackground.uiColor
 //        self.textField.textColor = StudiumColor.primaryLabel.uiColor
         

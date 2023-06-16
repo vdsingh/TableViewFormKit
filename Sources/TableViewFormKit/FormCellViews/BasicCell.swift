@@ -17,6 +17,6 @@ protocol FormCellProtocol {
 public class BasicCell: UITableViewCell {
     override public func awakeFromNib() {
         super.awakeFromNib()
-        self.backgroundColor = ColorManager.secondaryBackgroundColor
+        self.backgroundColor = ColorManager.cellBackgroundColor
     }
 }

@@ -10,21 +10,42 @@ import UIKit
 import VikUtilityKit
 
 //TODO: Docstrings
-public class LogoCollectionViewCell: UICollectionViewCell {
+class LogoCollectionViewCell: UICollectionViewCell {
 
     /// ImageView to display the logo
-    @IBOutlet weak var imageView: UIImageView!
+//    @IBOutlet weak var imageView: UIImageView!
+    
+    var imageView: UIImageView = {
+       let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFit
+        return imageView
+    }()
+    
+    func setup() {
+        self.addSubviewsAndEstablishConstraints()
+    }
     
     /// Sets the image for the logo
     /// - Parameters:
-    ///   - systemIcon: The image that we want to show
+    ///   - image: The image that we want to show
     ///   - tintColor: The color of the image
-    public func setImage(systemIcon: SystemIcon, tintColor: UIColor){
-        imageView.tintColor = tintColor
-        imageView.image = systemIcon.createImage()
+    func setImage(image: UIImage, tintColor: UIColor) {
+        self.imageView.tintColor = tintColor
+        self.imageView.image = image
+    }
+    
+    private func addSubviewsAndEstablishConstraints() {
+        self.addSubview(self.imageView)
+        NSLayoutConstraint.activate([
+            self.imageView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            self.imageView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            self.imageView.topAnchor.constraint(equalTo: self.topAnchor),
+            self.imageView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+        ])
     }
 }
 
-extension LogoCollectionViewCell: FormCellProtocol {
+extension LogoCollectionViewCell {
     public static var id: String = "LogoCollectionViewCell"
 }

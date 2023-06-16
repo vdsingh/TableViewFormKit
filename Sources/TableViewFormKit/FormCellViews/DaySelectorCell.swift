@@ -36,6 +36,9 @@ public class DaySelectorCell: BasicCell {
     
     override public func awakeFromNib() {
         super.awakeFromNib()
+        for button in self.dayButtons {
+            button.tintColor = self.buttonTintColor
+        }
     }
 
     //TODO: Docstrings

@@ -33,8 +33,8 @@ public class TimeCell: BasicCell {
     override public func awakeFromNib() {
         super.awakeFromNib()
 //        self.backgroundColor = StudiumColor.secondaryBackground.uiColor
-//        self.label.textColor = StudiumColor.primaryLabel.uiColor
-//        self.timeLabel.textColor = StudiumColor.primaryLabel.uiColor
+        self.label.textColor = ColorManager.primaryTextColor
+        self.timeLabel.textColor = ColorManager.primaryTextColor
     }
     
     //TODO: Docstrings

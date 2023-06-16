@@ -28,7 +28,7 @@ open class TableViewForm: UITableViewController {
         self.tableView.register(UINib(nibName: LabelCell.id, bundle: .module), forCellReuseIdentifier: LabelCell.id)
         self.tableView.register(UINib(nibName: SwitchCell.id, bundle: .module), forCellReuseIdentifier: SwitchCell.id)
         self.tableView.register(UINib(nibName: DaySelectorCell.id, bundle: .module), forCellReuseIdentifier: DaySelectorCell.id)
-        self.tableView.register(UINib(nibName: LogoCell.id, bundle: .module), forCellReuseIdentifier: LogoCell.id)
+        self.tableView.register(UINib(nibName: LogoSelectionCell.id, bundle: .module), forCellReuseIdentifier: LogoSelectionCell.id)
         self.tableView.register(UINib(nibName: ColorPickerCell.id, bundle: .module), forCellReuseIdentifier: ColorPickerCell.id)
         self.tableView.register(UINib(nibName: SegmentedControlCell.id, bundle: .module), forCellReuseIdentifier: SegmentedControlCell.id)
     }
@@ -63,12 +63,13 @@ extension TableViewForm {
             cell.label.text = cellText
             cell.tableSwitch.isOn = isOn
             return cell
-        case .labelCell(let cellText, let textColor, let backgroundColor, let cellAccessoryType, _):
+        case .labelCell(let cellText, let icon, let textColor, let backgroundColor, let cellAccessoryType, _):
             let cell = tableView.dequeueReusableCell(withIdentifier: LabelCell.id, for: indexPath) as! LabelCell
             cell.label.text = cellText
             cell.label.textColor = textColor
             cell.backgroundColor = backgroundColor
             cell.accessoryType = cellAccessoryType
+            cell.setIcon(iconImage: icon)
             return cell
         case .errorCell(let errors):
             let cell = tableView.dequeueReusableCell(withIdentifier: LabelCell.id, for: indexPath) as! LabelCell
@@ -119,8 +120,8 @@ extension TableViewForm {
             cell.indexPath = indexPath
             return cell
         case .logoCell(let logo, _):
-            let cell = tableView.dequeueReusableCell(withIdentifier: LogoCell.id, for: indexPath) as! LogoCell
-            cell.setImage(systemIcon: logo)
+            let cell = tableView.dequeueReusableCell(withIdentifier: LogoSelectionCell.id, for: indexPath) as! LogoSelectionCell
+            cell.setImage(image: logo)
             return cell
         }
     }

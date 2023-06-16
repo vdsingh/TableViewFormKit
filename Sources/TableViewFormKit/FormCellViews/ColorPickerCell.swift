@@ -32,24 +32,18 @@ public class ColorPickerCell: BasicCell {
     public var delegate: ColorDelegate?
     
     //TODO: Docstrings
-    var color: UIColor = .green {
+    var color: UIColor = .black {
         didSet {
             self.colorPreview.backgroundColor = self.color
-            
         }
     }
     
     override public func awakeFromNib() {
         super.awakeFromNib()
-//        if ColorPickerCell.color != nil {
-//            colorPicker.selectedColor = ColorPickerCell.color!
-//            colorPreview.backgroundColor = ColorPickerCell.color!
-//        }
         
         self.color = .white
-//
         self.colorPicker.selectedColor = self.color
-        self.colorPicker.backgroundColor = ColorManager.secondaryBackgroundColor
+        self.colorPicker.backgroundColor = ColorManager.cellBackgroundColor
         self.label.textColor = ColorManager.primaryTextColor
     }
     

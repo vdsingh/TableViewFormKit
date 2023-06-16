@@ -10,10 +10,10 @@ import UIKit
 import VikUtilityKit
 
 //TODO: Docstrings
-public class LogoCell: BasicCell {
+public class LogoSelectionCell: BasicCell {
     
     /// ImageView for the logo
-    @IBOutlet weak public var logoImageView: UIImageView!
+    @IBOutlet weak private var logoImageView: UIImageView!
     
     /// Label
     @IBOutlet weak public var label: UILabel!
@@ -25,12 +25,12 @@ public class LogoCell: BasicCell {
     }
     
     /// Sets the logo image
-    /// - Parameter systemIcon: The logo image to display
-    public func setImage(systemIcon: SystemIcon) {
-        logoImageView.image = systemIcon.createImage()
+    /// - Parameter image: The logo image to display
+    public func setImage(image: UIImage) {
+        logoImageView.image = image
     }
 }
 
-extension LogoCell: FormCellProtocol {
-    public static var id: String = "LogoCell"
+extension LogoSelectionCell: FormCellProtocol {
+    public static var id: String = "LogoSelectionCell"
 }

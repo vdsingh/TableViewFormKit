@@ -31,8 +31,9 @@ public enum FormCell: Equatable {
     
     case labelCell(
         cellText: String,
+        icon: UIImage? = nil,
         textColor: UIColor = ColorManager.primaryTextColor,
-        backgroundColor: UIColor = ColorManager.secondaryBackgroundColor,
+        backgroundColor: UIColor = ColorManager.cellBackgroundColor,
         cellAccessoryType: UITableViewCell.AccessoryType = .none,
         onClick: (() -> Void)? = nil
     )
@@ -80,7 +81,7 @@ public enum FormCell: Equatable {
     )
     
     case logoCell(
-        logo: SystemIcon,
+        logo: UIImage,
         onClick: (() -> Void)? = nil
     )
 }
