@@ -76,6 +76,7 @@ extension TableViewForm {
             cell.label.text = self.constructErrorString(errors: errors)
             cell.label.textColor = ColorManager.failure
             cell.label.numberOfLines = 0
+            cell.setIcon(iconImage: nil)
             cell.backgroundColor = ColorManager.primaryBackgroundColor
             cell.accessoryType = .none
             return cell

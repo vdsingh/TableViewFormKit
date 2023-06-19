@@ -27,6 +27,8 @@ public class LabelCell: BasicCell {
             self.iconImageView.image = icon
             self.iconImageView.isHidden = false
             self.iconImageView.tintColor = color
+        } else {
+            self.iconImageView.isHidden = true
         }
     }
 }
