@@ -22,12 +22,13 @@ public class LogoSelectionCell: BasicCell {
         super.awakeFromNib()
         self.label.textColor = ColorManager.primaryTextColor
         self.logoImageView.tintColor = ColorManager.primaryAccentColor
+        self.accessoryType = .disclosureIndicator
     }
     
     /// Sets the logo image
     /// - Parameter image: The logo image to display
     public func setImage(image: UIImage) {
-        logoImageView.image = image
+        self.logoImageView.image = image
     }
 }
 

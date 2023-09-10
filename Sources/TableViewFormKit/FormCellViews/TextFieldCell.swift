@@ -13,13 +13,24 @@ import UIKit
 public class TextFieldCell: BasicCell {
     
     //TODO: Docstrings
-    public var textFieldID: FormCellID.TextFieldCellID?
+//    public var textfieldID: FormCellID.TextFieldCellID?
 
     //TODO: Docstrings
     @IBOutlet weak public var textField: UITextField!
     
+    @IBOutlet weak var charLimitLabel: UILabel!
+    
+    var charLimit: Int? {
+        didSet {
+            self.updateCharLimitLabel(textField: self.textField)
+        }
+    }
+    
     //TODO: Docstrings
-    public var delegate: UITextFieldDelegateExtension!
+//    public var delegate: UITextFieldDelegateExtension!
+    
+    //TODO: Docstring
+    public var textFieldWasEdited: ((String) -> Void)?
     
     override public func awakeFromNib() {
         super.awakeFromNib()
@@ -32,12 +43,9 @@ public class TextFieldCell: BasicCell {
         self.textField.attributedPlaceholder = NSAttributedString(string: textField.placeholder ?? "", attributes: attributes)
         self.textField.textColor = ColorManager.primaryTextColor
         
-//        self.backgroundColor = StudiumColor.secondaryBackground.uiColor
-//        self.textField.textColor = StudiumColor.primaryLabel.uiColor
-        
-//        self.textField.placeholder
-//        self.textField.attributedPlaceholder = NSAttributedString(string: "Enter Text", attributes: [NSAttributedString.Key.foregroundColor: StudiumColor.secondaryLabel.uiColor])
-
+        self.charLimitLabel.isHidden = true
+        self.charLimitLabel.font = .systemFont(ofSize: 10)
+        self.charLimitLabel.textColor = ColorManager.placeholderTextColor
     }
 
     //TODO: Docstrings
@@ -47,11 +55,38 @@ public class TextFieldCell: BasicCell {
     
     //TODO: Docstrings
     @IBAction func textEdited(_ sender: UITextField) {
-        if let textFieldID = self.textFieldID {
-            delegate.textEdited(sender: sender, textFieldID: textFieldID)
-        } else {
-            print("$ ERROR: textFieldID not supplied.")
+//        if let textFieldID = self.textFieldID {
+//            self.delegate.textEdited(sender: sender, textFieldID: textFieldID)
+        if let text = sender.text {
+            if let textFieldWasEdited = self.textFieldWasEdited {
+                textFieldWasEdited(text)
+            }
+            self.updateCharLimitLabel(textField: sender)
         }
+//        }
+        
+//        else {
+//            print("$ ERROR: textFieldID not supplied.")
+//        }
+    }
+    
+    private func updateCharLimitLabel(textField: UITextField) {
+        if let charLimit = self.charLimit {
+            self.charLimitLabel.isHidden = false
+            let numChars = (textField.text ?? "").count
+            self.charLimitLabel.text = "\(numChars)/\(charLimit)"
+            if numChars > charLimit {
+                self.charLimitLabel.textColor = ColorManager.failure
+            } else {
+                self.charLimitLabel.textColor = ColorManager.placeholderTextColor
+            }
+        } else {
+            self.charLimitLabel.isHidden = true
+        }
+    }
+    
+    func setCharLimit(_ charLimit: Int?) {
+        self.charLimit = charLimit
     }
 }
 

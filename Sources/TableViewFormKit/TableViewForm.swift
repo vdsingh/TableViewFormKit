@@ -16,6 +16,7 @@ open class TableViewForm: UITableViewController {
     open override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = ColorManager.primaryBackgroundColor
+        self.tableView.separatorColor = ColorManager.tableViewSeparatorColor
         self.registerFormCells()
     }
     
@@ -25,11 +26,13 @@ open class TableViewForm: UITableViewController {
         self.tableView.register(UINib(nibName: TimeCell.id, bundle: .module), forCellReuseIdentifier: TimeCell.id)
         self.tableView.register(UINib(nibName: PickerCell.id, bundle: .module), forCellReuseIdentifier: PickerCell.id)
         self.tableView.register(UINib(nibName: TimePickerCell.id, bundle: .module), forCellReuseIdentifier: TimePickerCell.id)
+        self.tableView.register(DatePickerCell.self, forCellReuseIdentifier: DatePickerCell.id)
         self.tableView.register(UINib(nibName: LabelCell.id, bundle: .module), forCellReuseIdentifier: LabelCell.id)
         self.tableView.register(UINib(nibName: SwitchCell.id, bundle: .module), forCellReuseIdentifier: SwitchCell.id)
         self.tableView.register(UINib(nibName: DaySelectorCell.id, bundle: .module), forCellReuseIdentifier: DaySelectorCell.id)
         self.tableView.register(UINib(nibName: LogoSelectionCell.id, bundle: .module), forCellReuseIdentifier: LogoSelectionCell.id)
         self.tableView.register(UINib(nibName: ColorPickerCell.id, bundle: .module), forCellReuseIdentifier: ColorPickerCell.id)
+        self.tableView.register(ColorPickerCellV2.self, forCellReuseIdentifier: ColorPickerCellV2.id)
         self.tableView.register(UINib(nibName: SegmentedControlCell.id, bundle: .module), forCellReuseIdentifier: SegmentedControlCell.id)
     }
     
@@ -48,13 +51,14 @@ extension TableViewForm {
     override open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = cells[indexPath.section][indexPath.row]
         switch cell {
-        case .textFieldCell(let placeholderText, let text, let id, let textFieldDelegate, let delegate):
+        case .textFieldCell(let placeholderText, let text, let charLimit, let textfieldWasEdited):
             let cell = tableView.dequeueReusableCell(withIdentifier: TextFieldCell.id, for: indexPath) as! TextFieldCell
             cell.textField.placeholder = placeholderText
-            cell.textField.delegate = textFieldDelegate
-            cell.delegate = delegate
-            cell.textFieldID = id
+            cell.textFieldWasEdited = textfieldWasEdited
+//            cell.delegate = delegate
+//            cell.textFieldID = id
             cell.textField.text = text
+            cell.setCharLimit(charLimit)
             return cell
         case .switchCell(let cellText, let isOn, let switchDelegate, let infoDelegate):
             let cell = tableView.dequeueReusableCell(withIdentifier: SwitchCell.id, for: indexPath) as! SwitchCell
@@ -94,6 +98,10 @@ extension TableViewForm {
             dateFormatter.dateFormat = dateFormat.rawValue
             cell.picker.setDate(date, animated: true)
             return cell
+        case .datePickerCell:
+            let cell = tableView.dequeueReusableCell(withIdentifier: DatePickerCell.id, for: indexPath) as! DatePickerCell
+            cell.host(parent: self)
+            return cell
         case .daySelectorCell(let daysSelected, let delegate):
             let cell = tableView.dequeueReusableCell(withIdentifier: DaySelectorCell.id, for: indexPath) as! DaySelectorCell
             cell.delegate = delegate
@@ -109,6 +117,10 @@ extension TableViewForm {
         case .colorPickerCell(let delegate):
             let cell = tableView.dequeueReusableCell(withIdentifier: ColorPickerCell.id, for: indexPath) as! ColorPickerCell
             cell.delegate = delegate
+            return cell
+        case .colorPickerCellV2(let colors, let colorWasSelected):
+            let cell = tableView.dequeueReusableCell(withIdentifier: ColorPickerCellV2.id, for: indexPath) as! ColorPickerCellV2
+            cell.host(parent: self, colors: colors, colorWasSelected: colorWasSelected)
             return cell
         case .pickerCell(_, let indices, let tag, let delegate, let dataSource):
             let cell = tableView.dequeueReusableCell(withIdentifier: PickerCell.id, for: indexPath) as! PickerCell

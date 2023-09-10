@@ -3,7 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -29,16 +29,25 @@
                             <action selector="textEdited:" destination="KGk-i7-Jjw" eventType="editingChanged" id="aV4-jj-Fg3"/>
                         </connections>
                     </textField>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GJK-a9-hAZ">
+                        <rect key="frame" x="298" y="26" width="42" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="nXI-Ly-Emf" secondAttribute="trailing" id="0ee-av-Q3I"/>
+                    <constraint firstItem="nXI-Ly-Emf" firstAttribute="trailing" secondItem="GJK-a9-hAZ" secondAttribute="trailing" constant="10" id="HgT-p0-wsM"/>
                     <constraint firstItem="nXI-Ly-Emf" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="I78-0e-F4D"/>
                     <constraint firstAttribute="bottom" secondItem="nXI-Ly-Emf" secondAttribute="bottom" id="O4b-3f-ISI"/>
                     <constraint firstItem="nXI-Ly-Emf" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="OJR-Z7-cNv"/>
+                    <constraint firstItem="nXI-Ly-Emf" firstAttribute="bottom" secondItem="GJK-a9-hAZ" secondAttribute="bottom" constant="3" id="aqq-XA-kEq"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="charLimitLabel" destination="GJK-a9-hAZ" id="Jph-6H-Pkr"/>
                 <outlet property="textField" destination="nXI-Ly-Emf" id="Ibu-22-O2R"/>
             </connections>
             <point key="canvasLocation" x="63.768115942028992" y="128.57142857142856"/>

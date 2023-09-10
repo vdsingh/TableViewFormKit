@@ -37,9 +37,10 @@ public class TimePickerCell: BasicCell {
         super.awakeFromNib()
         
         self.picker.setValue(UIColor.white, forKeyPath: "textColor")
+        
         self.picker.timeZone = NSTimeZone.local
         if #available(iOS 13.4, *) {
-            picker.preferredDatePickerStyle = UIDatePickerStyle.wheels
+            self.picker.preferredDatePickerStyle = UIDatePickerStyle.wheels
         }
     }
     
@@ -67,3 +68,5 @@ public class TimePickerCell: BasicCell {
 extension TimePickerCell: FormCellProtocol {
     public static var id: String = "TimePickerCell"
 }
+
+

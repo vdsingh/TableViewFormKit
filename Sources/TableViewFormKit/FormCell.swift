@@ -6,6 +6,7 @@
 //
 import Foundation
 import UIKit
+import SwiftUI
 import VikUtilityKit
 
 /// Form cells and all their necessary information to build a form
@@ -17,9 +18,10 @@ public enum FormCell: Equatable {
     case textFieldCell(
         placeholderText: String,
         text: String?,
-        id: FormCellID.TextFieldCellID,
-        textFieldDelegate: UITextFieldDelegate,
-        delegate: UITextFieldDelegateExtension
+        charLimit: Int?,
+//        id: FormCellID.TextFieldCellID,
+        textfieldWasEdited: (String) -> Void
+//        delegate: UITextFieldDelegateExtension
     )
     
     case switchCell(
@@ -59,6 +61,8 @@ public enum FormCell: Equatable {
         delegate: UITimePickerDelegate
     )
     
+    case datePickerCell
+    
     case daySelectorCell(
         daysSelected: Set<Weekday>,
         delegate: DaySelectorDelegate
@@ -72,6 +76,11 @@ public enum FormCell: Equatable {
     
     case colorPickerCell(delegate: ColorDelegate)
     
+    case colorPickerCellV2(
+        colors: [UIColor],
+        colorWasSelected: (Color) -> Void
+    )
+    
     case pickerCell(
         cellText: String,
         indices: [Int],
@@ -79,6 +88,7 @@ public enum FormCell: Equatable {
         delegate: UIPickerViewDelegate,
         dataSource: UIPickerViewDataSource
     )
+    
     
     case logoCell(
         logo: UIImage,
@@ -90,11 +100,11 @@ public enum FormCell: Equatable {
 public enum FormCellID {
     
     // TextField Cells
-    public enum TextFieldCellID {
-        case nameTextField
-        case locationTextField
-        case additionalDetailsTextField
-    }
+//    public enum TextFieldCellID {
+//        case nameTextField
+//        case locationTextField
+//        case additionalDetailsTextField
+//    }
     
     // TimePickerCells
     public enum TimePickerCellID {

@@ -21,4 +21,6 @@ public final class ColorManager {
     public static var placeholderTextColor: UIColor = .placeholderText
     
     public static var failure: UIColor = .red
+    
+    public static var tableViewSeparatorColor: UIColor = .secondarySystemBackground
 }

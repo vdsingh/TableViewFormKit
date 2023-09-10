@@ -9,8 +9,8 @@ import Foundation
 import UIKit
 
 //TODO: Docstrings
-public protocol UITextFieldDelegateExtension {
-    
-    //TODO: Docstrings
-    func textEdited(sender: UITextField, textFieldID: FormCellID.TextFieldCellID)
-}
+//public protocol UITextFieldDelegateExtension {
+//    
+//    //TODO: Docstrings
+//    func textEdited(sender: UITextField, textFieldID: FormCellID.TextFieldCellID)
+//}
